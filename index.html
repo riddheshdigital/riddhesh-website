@@ -301,85 +301,99 @@
 
     <!-- CTA SECTION -->
     <section id="contact" class="py-20 hero-gradient text-white">
-      <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
-        <div>
-          <h2 class="text-4xl font-bold mb-6">Grow Your Business Today</h2>
-          <p class="text-gray-300 mb-8">Let’s discuss your project and how we can help you scale with precision and
-            speed.</p>
+  <div class="max-w-5xl mx-auto grid md:grid-cols-2 gap-16 items-center">
 
-          <div class="space-y-4">
-            <!-- <div class="flex items-center gap-4">
-                  <span
-                    class="w-10 h-10 bg-brandDark text-brandAccent flex items-center justify-center rounded-lg"
-                    ><i class="fas fa-phone"></i
-                  ></span>
-                  <p>+1 (555) 000-TECH</p>
-                </div> -->
-            <div class="flex items-center gap-4">
-              <span class="w-10 h-10 bg-brandDark text-brandAccent flex items-center justify-center rounded-lg"><i
-                  class="fas fa-envelope"></i></span>
-              <p>riddheshdigital@gmail.com</p>
-            </div>
-          </div>
-        </div>
+    <!-- LEFT CONTENT -->
+    <div>
+      <h2 class="text-4xl font-bold mb-6">Grow Your Business Today</h2>
+      <p class="text-gray-300 mb-8">
+        Let’s discuss your project and how we can help you scale with precision and speed.
+      </p>
 
-        <div class="bg-white p-8 rounded-2xl shadow-2xl text-gray-900">
-          <form id="contactForm" class="space-y-4">
-
-            <input type="text" name="name" placeholder="Full Name" required class="w-full p-3 border rounded-lg">
-
-            <input type="tel" name="phone" placeholder="Phone Number" required class="w-full p-3 border rounded-lg">
-
-            <input type="email" name="email" placeholder="Email Address" required class="w-full p-3 border rounded-lg">
-
-            <select name="service" required class="w-full p-3 border rounded-lg">
-              <option value="">Select Service</option>
-              <option>Digital Marketing</option>
-              <option>Web Development</option>
-              <option>Tech Solutions</option>
-            </select>
-
-            <textarea name="message" rows="4" placeholder="Your Message"
-              class="w-full p-3 border rounded-lg"></textarea>
-
-            <button type="submit" class="w-full bg-brandAccent text-primary font-bold py-4 rounded-lg">
-              Send Message
-            </button>
-
-          </form>
-
-          <!-- EMAILJS SCRIPT -->
-          <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-
-          <script>
-              (function () {
-                emailjs.init("6JymVAICstdwUw-8p");
-              })();
-
-            document.getElementById("contactForm").addEventListener("submit", function (e) {
-              e.preventDefault();
-
-              emailjs.sendForm(
-                "service_1ck2pem",
-                "template_78j7j3b",
-                this
-              ).then(
-                function () {
-                  alert("Message sent successfully!");
-                  document.getElementById("contactForm").reset();
-                },
-                function (error) {
-                  alert("Failed to send message");
-                  console.error(error);
-                }
-              );
-            });
-          </script>
-
-
+      <div class="space-y-4">
+        <div class="flex items-center gap-4">
+          <span class="w-10 h-10 bg-brandDark text-brandAccent flex items-center justify-center rounded-lg">
+            <i class="fas fa-envelope"></i>
+          </span>
+          <p>riddheshdigital@gmail.com</p>
         </div>
       </div>
-    </section>
+    </div>
+
+    <!-- FORM -->
+    <div class="bg-white p-8 rounded-2xl shadow-2xl text-gray-900">
+      <form id="contactForm" class="space-y-4">
+
+        <input type="text" name="name" placeholder="Full Name" required
+          class="w-full p-3 border rounded-lg">
+
+        <input type="tel" name="phone" placeholder="Phone Number" required
+          class="w-full p-3 border rounded-lg">
+
+        <input type="email" name="email" placeholder="Email Address" required
+          class="w-full p-3 border rounded-lg">
+
+        <select name="service" required class="w-full p-3 border rounded-lg">
+          <option value="">Select Service</option>
+          <option>Digital Marketing</option>
+          <option>Web Development</option>
+          <option>Tech Solutions</option>
+        </select>
+
+        <textarea name="message" rows="4" placeholder="Your Message"
+          class="w-full p-3 border rounded-lg"></textarea>
+
+        <!-- CAPTCHA -->
+        <div class="g-recaptcha" data-sitekey="6Lfn9D4sAAAAALTTLGMl6IBfmwP6TkaL3yuO6vi2"></div>
+
+        <button type="submit"
+          class="w-full bg-brandAccent text-primary font-bold py-4 rounded-lg">
+          Send Message
+        </button>
+
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- RECAPTCHA SCRIPT -->
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+<!-- EMAILJS SCRIPT -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+
+<script>
+  (function () {
+    emailjs.init("6JymVAICstdwUw-8p");
+  })();
+
+  document.getElementById("contactForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const captchaResponse = grecaptcha.getResponse();
+    if (!captchaResponse) {
+      alert("Please verify that you are not a robot.");
+      return;
+    }
+
+    emailjs.sendForm(
+      "service_1ck2pem",
+      "template_78j7j3b",
+      this
+    ).then(
+      function () {
+        alert("Message sent successfully!");
+        document.getElementById("contactForm").reset();
+        grecaptcha.reset();
+      },
+      function (error) {
+        alert("Failed to send message");
+        console.error(error);
+      }
+    );
+  });
+</script>
+
     <!-- FOOTER SECTION -->
     <footer class="bg-brandDark text-slate-400 py-5">
       <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-center items-center">
