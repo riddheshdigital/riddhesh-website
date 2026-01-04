@@ -13,5 +13,9 @@
   <button onclick="saveContent()">Save</button>
 
   <script src="js/admin.js"></script>
+  <script>const pass = prompt("Enter admin password");
+if (pass !== "admin123") {
+  document.body.innerHTML = "Access Denied";
+}</script>
 </body>
 </html>
